@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Climate Record</title>
+</head>
+<body>
+    <h1>Create Climate Record</h1>
+    <form id="createForm">
+        <label for="country">Country:</label>
+        <input type="text" id="country" name="country" required><br>
+
+        <label for="temperatureChange">Temperature Change:</label>
+        <input type="number" step="0.1" id="temperatureChange" name="temperatureChange" required><br>
+
+        <label for="year">Year:</label>
+        <input type="number" id="year" name="year" required><br>
+
+        <button type="submit">Create Record</button>
+    </form>
+
+    <script>
+        document.getElementById('createForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const record = {
+                country: document.getElementById('country').value,
+                temperatureChange: parseFloat(document.getElementById('temperatureChange').value),
+                year: parseInt(document.getElementById('year').value)
+            };
+
+            fetch('http://localhost:5197/climate/add', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(record)
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+                alert('Record created successfully!');
+                // Optionally, clear the form fields after successful submission
+                document.getElementById('createForm').reset();
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('There was an error creating the record.');
+            });
+        });
+    </script>
+</body>
+</html>

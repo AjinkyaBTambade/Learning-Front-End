@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Get All Climate Records</title>
+</head>
+<body>
+    <h1>All Climate Records</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Country</th>
+                <th>Temperature Change</th>
+                <th>Year</th>
+            </tr>
+        </thead>
+        <tbody id="recordsTableBody">
+        </tbody>
+    </table>
+
+    <script>
+        function fetchRecords() {
+            fetch('http://localhost:5197/climate')
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+                const tableBody = document.getElementById('recordsTableBody');
+                tableBody.innerHTML = '';
+                data.forEach(record => {
+                    const row = document.createElement('tr');
+                    row.innerHTML = `
+                        <td>${record.id}</td>
+                        <td>${record.country}</td>
+                        <td>${record.temperatureChange}</td>
+                        <td>${record.year}</td>
+                    `;
+                    tableBody.appendChild(row);
+                });
+            })
+            .catch(error => {
+                console.error('There was a problem with the fetch operation:', error);
+            });
+        }
+        fetchRecords();
+    </script>
+</body>
+</html>

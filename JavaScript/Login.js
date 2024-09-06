@@ -5,7 +5,6 @@ function handleSubmit() {
     if (username === "" || password === "") {
         document.getElementById("error-message").innerHTML = "Both fields are required.";
     } else {
-        document.getElementById("error-message").innerHTML = ""; // Clear error message
         console.log("Username: " + username);
         console.log("Password: " + password);
     }

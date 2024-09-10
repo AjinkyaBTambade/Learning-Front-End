@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head></head>
+<body>
+    <canvas id="canvas1" width="300" height="300" onmousedown="onMouseDownHandler(event)" onmouseup="onMouseUpHandler(event)" style="border:1px solid blue"></canvas>
+    <hr/>
+    <script>
+    // Clean Code Strategy:
+    // global variables
+    var startPoint = { x: 0, y: 0 };
+    var endPoint = { x: 0, y: 0 };
+    var lines = [];
+
+    // function declaration
+    function draw() {
+        const cnvs = document.getElementById('canvas1');
+        const ctx = cnvs.getContext("2d");
+        ctx.clearRect(0, 0, cnvs.width, cnvs.height); // Clear the canvas before redrawing
+        ctx.beginPath();
+        if (lines !== null && lines.length > 0) {
+            for (var i = 0; i < lines.length; i++) {
+                let l = lines[i];
+                ctx.moveTo(l.startPoint.x, l.startPoint.y);
+                ctx.lineTo(l.endPoint.x, l.endPoint.y);
+                ctx.stroke();
+            }
+        }
+    }
+
+    function onMouseDownHandler(e) {
+        const cnvs = document.getElementById('canvas1');
+        let x = e.clientX - cnvs.offsetLeft;
+        let y = e.clientY - cnvs.offsetTop;
+        startPoint.x = x;
+        startPoint.y = y;
+    }
+
+    function onMouseUpHandler(e) {
+        const cnvs = document.getElementById('canvas1');
+        let x = e.clientX - cnvs.offsetLeft;
+        let y = e.clientY - cnvs.offsetTop;
+        endPoint.x = x;
+        endPoint.y = y;
+
+        let line = {
+            startPoint: { x: startPoint.x, y: startPoint.y },
+            endPoint: { x: endPoint.x, y: endPoint.y }
+        };
+
+        lines.push(line);
+        let strLines = JSON.stringify(lines);
+        localStorage.setItem("lines", strLines);
+        draw();
+    }
+
+    // Execution
+    let strRetrievedLines = localStorage.getItem("lines");
+    if (strRetrievedLines !== null) {
+        lines = JSON.parse(strRetrievedLines);
+        draw();
+    }
+    </script>
+</body>
+</html>

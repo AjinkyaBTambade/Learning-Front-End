@@ -12,7 +12,20 @@
             //always keep awaiting for result using await keyword
             //you must define this calling function as async method
             //best practice : apply exception handling for remote data access 
-           
+            const fetchRestAPI= async()=> {
+                try {
+                        let appUrl="https://jsonplaceholder.typicode.com/posts"
+                        const response = await fetch(appUrl);
+                        if (!response.ok) {
+                            throw new Error(`Response status: ${response.status}`);
+                        }
+                        const json = await response.json();
+                        console.log(json);
+                    } 
+                catch (error) {console.error(error.message);}
+            };
+            function onShow(){
+                  fetchRestAPI();
             }
         </script>
     </body>

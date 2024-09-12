@@ -13,6 +13,28 @@ class ProductService {
         console.log("Product created: ", product);
     }
 
+    update(product) {
+        const productIndex = this.products.findIndex(p => p.id === product.id);
+        if (productIndex === -1) {
+            console.log("Product not found with id " + product.id);
+            return null;
+        }
+        this.products[productIndex] = product;
+        console.log("Product updated: ", product);
+        return product;
+    }
+    
+    remove(productId) {
+        const productIndex = this.products.findIndex(p => p.id === productId);
+        if (productIndex === -1) {
+            console.log("Product not found with id " + productId);
+            return null;
+        }
+        const deletedProduct = this.products.splice(productIndex, 1)[0];
+        console.log("Product removed: ", deletedProduct);
+        return deletedProduct;
+    }
+
   
 }
 
@@ -43,4 +65,17 @@ function insertFlower() {
 
 function showAllData() {
     console.log("All Products: ", productService.getAll());
+}
+
+
+// Update data (update product)
+function updateFlower() {
+    let product = getFormData();
+    productService.update(product);
+}
+
+// Remove data (remove product)
+function removeFlower() {
+    let productId = parseInt(document.getElementById('id').value);
+    productService.remove(productId);
 }

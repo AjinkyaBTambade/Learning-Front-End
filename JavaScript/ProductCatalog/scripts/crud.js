@@ -33,8 +33,7 @@ class ProductService{
         if(productIndex === -1){
             console.log("Product not found with id "+ productId)
         }
-        //remove the product from the array
-        const deletedProduct=this.products.slice(productIndex,1)[0];
-        return deletedProduct;
+        this.products=this.products.splice(productIndex,1);
+        //this.products=this.products.filter( (product)=>(product.id !== productId));
     }
 }

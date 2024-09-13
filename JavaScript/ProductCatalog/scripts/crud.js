@@ -38,16 +38,3 @@ class ProductService{
         return deletedProduct;
     }
 }
-
-
-/*let svc=new ProductService();
-console.log(svc.getAll());
-let theProduct1={ id:12, title:"gerbera", description:"wedding Flower",unitprice:5, stackavailable:9000};
-svc.create(theProduct1);
-
-
-let theProduct2={ id:12, title:"rose", description:"valentine Flower",unitprice:15, stackavailable:19000};
-svc.create(theProduct2);
-console.log(svc.getAll());
-
-*/

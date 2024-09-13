@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Services</title>
+</head>
+<body>
+    <h2>Product Data</h2>
+
+    <table>
+        <tr>
+            <td>ID</td>
+            <td><input type="number" id="id" /></td>
+        </tr>
+        <tr>
+            <td>Title</td>
+            <td><input type="text" id="title" /></td>
+        </tr>
+        <tr>
+            <td>Description</td>
+            <td><input type="text" id="description" /></td>
+        </tr>
+        <tr>
+            <td>Unit Price</td>
+            <td><input type="number" id="unitprice" /></td>
+        </tr>
+        <tr>
+            <td>Quantity Available</td>
+            <td><input type="number" id="stockavailable" /></td>
+        </tr>
+        <tr>
+            <td>
+                <button onclick="insertData()">Insert</button>
+                <button onclick="showAllData()">Show All</button>
+                <button onclick="updateData()">Update</button>
+            </td>
+        </tr>
+    </table>
+
+    <h3>Delete Product</h3>
+    <input type="number" id="deleteId" placeholder="Enter Product ID" />
+    <button onclick="removeData()">Delete</button>
+
+    <h3>Get Product By ID</h3>
+    <input type="number" id="getById" placeholder="Enter Product ID" />
+    <button onclick="getById()">Get Product</button>
+
+    <h3>Product List</h3>
+    <ol id="list"></ol>
+
+    <script src="./Scripts/ProductService.js"></script>
+    <script src="./Scripts/ProductDisplay.js"></script>
+    <script src="./Scripts/App.js"></script>
+</body>
+</html>

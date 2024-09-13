@@ -68,13 +68,12 @@ function showAllData() {
 }
 
 
-// Update data (update product)
 function updateFlower() {
     let product = getFormData();
     productService.update(product);
 }
 
-// Remove data (remove product)
+
 function removeFlower() {
     let productId = parseInt(document.getElementById('id').value);
     productService.remove(productId);

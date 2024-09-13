@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Product Services</title>
+    </head>
+    <body>
+        <script src="./Crud.js"></script>
+        <script src="./ProductDisplay.js"></script>
+        <script src="./ProductService.js"></script>
+        <h2>Flowers Data</h2>
+        <table>
+            <tr>
+                <td>Id</td>
+                <td><input type="number" id="id" name="id" value=""/></td>    
+            </tr>
+            <tr>
+                <td>Ti</td>
+                <td> <input type="text" id="title" name="title" value=""/></td>  
+            </tr>
+            <tr>
+                <td>Description</td>
+                <td>      <input type="text" id="description" name="description" value=""/></td>
+            </tr>
+            <tr>
+                <td>Unit Price</td>
+                <td><input type="number" id="unitprice" name="unitprice" value=""/></td>
+            </tr>
+            <tr>
+                <td>Quantity Available</td>
+                <td><input type="number" id="stockavailable" name="stockavailable" value=""/></td>
+            </tr>
+            <tr>
+                <td><button onclick="insertData()">Insert</button>
+                <button onclick="showAllData()">Show All Data</button>
+                <button onclick="updateData()">Update</button></table>
+                <button onclick="removeData()">Delete</button></td>
+            </tr>
+                <ol id="list">
+
+                </ol>
+            
+        </table>
+    </body>
+</html>       
+ 
+           
+ 
+ 
+ 
+ 
+         

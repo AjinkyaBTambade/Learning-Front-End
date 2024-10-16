@@ -1,4 +1,3 @@
-// ProductService.js
 class ProductService {
     constructor() {
         this.products = [];
@@ -27,7 +26,7 @@ class ProductService {
     }
 
     remove(productId) {
-        const productIndex = this.products.findIndex(p => p.id == productId);
+        const productIndex = this.products.findIndex(p => p.id === productId);
         if (productIndex === -1) {
             console.log("Product not found with id " + productId);
             return null;

@@ -1,5 +1,11 @@
-// Crud.js
 let svc = new ProductService();
+
+// Load products from sessionStorage on page load
+window.onload = () => {
+    const storedProducts = JSON.parse(sessionStorage.getItem('products')) || [];
+    svc.products = storedProducts; // Populate the service with stored products
+    displayAllProducts(storedProducts); // Display them on the page
+};
 
 function getFormData() {
     let id = parseInt(document.getElementById('id').value);
@@ -14,6 +20,7 @@ function getFormData() {
 function insertData() {
     let product = getFormData();
     svc.create(product);
+    sessionStorage.setItem('products', JSON.stringify(svc.products)); 
     showAllData();
 }
 
@@ -25,12 +32,14 @@ function showAllData() {
 function updateData() {
     let product = getFormData();
     svc.update(product);
+    sessionStorage.setItem('products', JSON.stringify(svc.products)); 
     showAllData();
 }
 
 function removeData() {
     let productId = parseInt(document.getElementById('deleteId').value);
     svc.remove(productId);
+    sessionStorage.setItem('products', JSON.stringify(svc.products)); 
     showAllData();
 }
 

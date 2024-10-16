@@ -1,25 +1,20 @@
-
 const displayAllProducts = (products) => {
     let lstProducts = document.getElementById("list");
 
-    
+    // Clear the previous list
     if (lstProducts.hasChildNodes()) {
         while (lstProducts.firstChild) {
             lstProducts.removeChild(lstProducts.firstChild);
         }
     }
 
-    
+    // Display each product in the list
     products.map((product) => {
         const node = document.createElement("li");
-        const textNode = document.createTextNode(`${product.id}: ${product.title} - ${product.description} - ${product.unitprice} - ${product.stockavailable}`);
+        const textNode = document.createTextNode(`${product.id}: ${product.title} - ${product.description} - $${product.unitprice.toFixed(2)} - Quantity Available: ${product.stockavailable}`);
         node.appendChild(textNode);
         lstProducts.appendChild(node);
     });
-
-   
-    let pItem = JSON.stringify(products);
-    localStorage.setItem("products", pItem);
 };
 
 const displayProduct = (product) => {

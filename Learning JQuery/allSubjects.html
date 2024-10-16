@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <title>Subjects List</title>
+</head>
+<body>
+
+    <h1>Subjects</h1>
+    <div id="subjects-list">
+        <p>Loading subjects...</p>
+    </div>
+
+    <h2>Add Subject</h2>
+    <form id="addSubjectForm">
+        <label for="title">Subject Title:</label>
+        <input type="text" id="title" name="title" required>
+        <button type="submit">Add Subject</button>
+    </form>
+
+    <div id="addResult"></div>
+
+    <h2>Delete Subject</h2>
+    <form id="deleteSubjectForm">
+        <label for="subjectId">Subject ID:</label>
+        <input type="number" id="subjectId" name="subjectId" required>
+        <button type="submit">Delete Subject</button>
+    </form>
+
+    <div id="deleteResult"></div>
+
+    <script>
+        var subjectsUrl = "http://localhost:5151/api/assessment/subjects";
+        var subjects;
+
+        // Fetch and display subjects when the page is loaded
+        $(document).ready(function() {
+
+            $.ajax({
+                url: subjectsUrl,
+                type: 'GET',
+                contentType: 'application/json',
+                success: function(data) {
+                    subjects = data;
+                    var subjectsList = $('#subjects-list');
+                    subjectsList.empty(); 
+                    if (subjects.length > 0) {
+                        var list = $('<ul></ul>'); 
+                        subjects.forEach(function(subject) {
+                            var listItem = $('<li></li>').text(subject.id + ": " + subject.title);
+                            list.append(listItem); 
+                        });
+                        subjectsList.append(list);
+                    } else {
+                        subjectsList.append('<p>No subjects available.</p>');
+                    }
+                },
+                error: function(xhr, status, error) {
+                    console.error(xhr.responseText);
+                    $('#subjects-list').html('<p>Error loading subjects.</p>');
+                }
+            });
+
+        });
+
+        // Function to add a new subject
+        $(document).ready(function() {
+            $('#addSubjectForm').submit(function(event) {
+                event.preventDefault();
+                const title = $('#title').val();
+                
+                $.ajax({
+                    url: 'http://localhost:5264/api/subject/add',
+                    type: 'POST',
+                    contentType: 'application/json',
+                    data: JSON.stringify({
+                        title: title
+                    }),
+                    success: function(response) {
+                        $('#addResult').html('<p>Subject added successfully!</p>');
+                    },
+                    error: function(xhr, status, error) {
+                        $('#addResult').html('<p>Error adding subject: ' + xhr.responseText + '</p>');
+                    }
+                });
+            });
+        });
+
+        // Function to delete a subject
+        $(document).ready(function() {
+            $('#deleteSubjectForm').submit(function(event) {
+                event.preventDefault();
+                const subjectId = $('#subjectId').val();
+
+                $.ajax({
+                    url: 'http://localhost:5264/api/subject/delete/' + subjectId,
+                    type: 'DELETE',
+                    success: function(response) {
+                        $('#deleteResult').html('<p>Subject deleted successfully!</p>');
+                    },
+                    error: function(xhr, status, error) {
+                        $('#deleteResult').html('<p>Error deleting subject: ' + xhr.responseText + '</p>');
+                    }
+                });
+            });
+        });
+    </script>
+
+</body>
+</html>

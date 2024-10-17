@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Onclick Example</title>
+</head>
+<body>
+    <label id="myLabel">Click the button!</label>
+    <br><br>
+    <button onclick="changeLabel()">Change Label</button>
+    <button onclick="toggleVisibility()">Toggle Visibility</button>
+    <button onclick="resetLabel()">Reset Label</button>
+
+    <script>
+        // Changes the label text when the button is clicked
+        function changeLabel() {
+            const label = document.getElementById("myLabel");
+            label.innerText = "Button clicked!";
+            console.log(label.innerText);
+        }
+
+        // Toggles the visibility of the label
+        function toggleVisibility() {
+            const label = document.getElementById("myLabel");
+            if (label.style.display === "none") {
+                label.style.display = "inline"; 
+                console.log("Label is now visible.");
+            } else {
+                label.style.display = "none"; 
+                console.log("Label is now hidden.");
+            }
+        }
+
+        // Resets the label text to its original state
+        function resetLabel() {
+            const label = document.getElementById("myLabel");
+            label.innerText = "Click the button!";
+            label.style.color = "";
+            label.style.display = "inline"; 
+            console.log("Label has been reset.");
+        }
+    </script>
+</body>
+</html>

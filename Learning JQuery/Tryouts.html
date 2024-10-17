@@ -6,32 +6,75 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>jQuery Tutorial</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        .highlight {
+            background-color: yellow;
+        }
+    </style>
 </head>
 
 <body>
-    <p class='odd'>this is my body1</p>
-    <p id='second'>this is my body2</p>
-    <p class='odd'>this is my body3</p>
-    <p>this is my body4</p>
-    <button id='but'>Toggle now</button>
-    <div id='wiki'>
-        <p>Welcome to Transflower Pvt. Ltd., where learning meets innovation. We specialize in providing hands-on,
-            project-based learning experiences that equip individuals with practical skills and knowledge in various
-            fields.</p>
-        <p>Our mission is to empower learners through real-world projects that bridge the gap between theoretical
-            knowledge and practical application. We aim to foster a culture of continuous learning and innovation.</p>
+    <p class='odd'>This is paragraph 1 (class: odd)</p>
+    <p id='second'>This is paragraph 2 (id: second)</p>
+    <p class='odd'>This is paragraph 3 (class: odd)</p>
+    <p>This is paragraph 4 (no class or id)</p>
 
+    <button id='toggleBtn'>Toggle Content Visibility</button>
+    
+    <div id='content'>
+        <p>Welcome to Transflower Pvt. Ltd., where learning meets innovation. We specialize in providing hands-on,
+            project-based learning experiences.</p>
+        <p>Our mission is to empower learners through real-world projects that bridge the gap between theory and practice.</p>
     </div>
 
-    <form>
-        <input id='inp' type="text">
-        <textarea id='ta'> this is your value my text area</textarea>
 
-    </form>
 </body>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script src="./tryouts.js"></script>
+<script>
+    $(document).ready(function () {
+        console.log("jQuery is ready!");
 
+
+        // Click event on all paragraphs
+        $('p').on('click', function () {
+            $(this).toggleClass('highlight'); 
+            console.log('Paragraph clicked:', this);
+        });
+
+
+        // Button to toggle the visibility of the content div
+        $('#toggleBtn').click(function () {
+            $('#content').slideToggle(1000, function () {
+                console.log('Content visibility toggled');
+            });
+        });
+
+
+        // Animate the content div
+        $('#content').animate({
+            opacity: 0.5,
+            height: 'toggle'
+        }, 5000, function () {
+            console.log('Animation complete');
+        });
+
+
+        // Example of adding and removing classes
+        $('#content').addClass('highlight');  
+        setTimeout(function () {
+            $('#content').removeClass('highlight');  
+        }, 1000);
+        
+
+        // AJAX Example
+        $('#toggleBtn').click(function () {
+            $.get('https://jsonplaceholder.typicode.com/todos/1', function (data, status) {
+                alert(`AJAX Call Status: ${status}`);
+                console.log('Data fetched:', data);
+            });
+        });
+    });
+</script>
 
 </html>

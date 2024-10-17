@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>jQuery Selectors Example</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        .highlight {
+            background-color: rgb(255, 0, 195);
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Element Selector Example</h1>
+    <p>This is paragraph 1.</p>
+    <p>This is paragraph 2.</p>
+    <button id="elementSelectorBtn">Highlight All Paragraphs</button>
+
+  
+    <h1>Id Selector Example</h1>
+    <p id="unique">I have a unique ID!</p>
+    <button id="idSelectorBtn">Highlight Unique Paragraph</button>
+
+
+    <h1>Class Selector Example</h1>
+    <p class="special">I belong to the 'special' class.</p>
+    <p class="special">I am also part of the 'special' class.</p>
+    <p>I do not have any class.</p>
+    <button id="classSelectorBtn">Highlight Special Paragraphs</button>
+
+    <script>
+        // 1. Element selector - selects all <p> elements and applies the 'highlight' class
+        $('#elementSelectorBtn').click(function() {
+            $('p').addClass('highlight');  // Highlights all paragraph elements
+        });
+
+        // 2. Id selector - selects the element with id 'unique' and applies the 'highlight' class
+        $('#idSelectorBtn').click(function() {
+            $('#unique').addClass('highlight');  // Highlights only the paragraph with the ID 'unique'
+        });
+
+        // 3. Class selector - selects all elements with the class 'special' and applies the 'highlight' class
+        $('#classSelectorBtn').click(function() {
+            $('.special').addClass('highlight');  // Highlights all elements with the class 'special'
+        });
+    </script>
+    
+</body>
+</html>
